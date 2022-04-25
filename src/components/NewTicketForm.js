@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 } from "uuid";
+import PropTypes from "prop-types";
 
 function NewTicketForm(props) {
   function handleNewTicketFormSubmission(event) {
@@ -8,7 +9,15 @@ function NewTicketForm(props) {
     console.log(event.target.location.value);
     console.log(event.target.issue.value);
   }
-
+  function handleNewTicketFormSubmission(event) {
+    event.preventDefault();
+    props.onNewTicketCreation({
+      names: event.target.names.value,
+      location: event.target.location.value,
+      issue: event.target.issue.value,
+      id: v4(),
+    });
+  }
   return (
     <React.Fragment>
       <form onSubmit={handleNewTicketFormSubmission}>
@@ -20,5 +29,9 @@ function NewTicketForm(props) {
     </React.Fragment>
   );
 }
+
+NewTicketForm.propTypes = {
+  onNewTicketCreation: PropTypes.func,
+};
 
 export default NewTicketForm;

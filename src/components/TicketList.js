@@ -4,7 +4,6 @@ import Ticket from "./Ticket";
 function TicketList(props) {
   return (
     <React.Fragment>
-      <hr />
       {props.ticketList.map((ticket, index) => (
         <Ticket
           names={ticket.names}

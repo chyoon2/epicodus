@@ -8,9 +8,10 @@ class TicketControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
+      mainTicketList: [],
     };
   }
-  handleAddingNewTicket = (newTicket) => {
+  handleAddingNewTicketToList = (newTicket) => {
     const newMainTicketList = this.state.mainTicketList.concat(newTicket);
     this.setState({
       mainTicketList: newMainTicketList,
@@ -30,12 +31,15 @@ class TicketControl extends React.Component {
     let buttonText = null;
 
     if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewTicketForm />;
+      currentlyVisibleState = (
+        <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />
+      );
       buttonText = "Return to Ticket List";
     } else {
       currentlyVisibleState = (
         <TicketList ticketList={this.state.mainTicketList} />
       );
+
       buttonText = "Add Ticket";
     }
     return (
